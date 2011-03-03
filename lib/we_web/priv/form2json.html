@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>Webmachine Example: form2json</title>
+<script language="javascript" type="text/javascript" src="js/json2.js"></script>
+<script language="javascript" type="text/javascript" src="js/form2object.js"></script>
+<script language="javascript" type="text/javascript">
+function update_user_profile() {
+    var formData = form2object('profile_form');
+    $.ajax({
+      type: 'PUT',
+      url: '/user',
+      async: false,
+      dataType: 'json',
+      data: JSON.stringify(formData),
+      processData: false,
+      contentType: "application/json",
+      success: function() {
+        alert("WOOO");
+      },
+      error: function (XMLHttpRequest, textStatus, errorThrown) {
+        alert("Ooooops!, request failed with status: " + XMLHttpRequest.status + ' ' + XMLHttpRequest.responseText);
+      }
+    });
+}
+</script>
+</head>
+
+<body>
+<h1>Webmachine Example: form2json</h1>
+
+<form name="profile_form" action="#">
+  <label for='username'>UserName</label>"
+  <input name='username' type='text' />"
+
+  <label for='first_name'>First Name</label>"
+  <input name='first_name' type='text' />"
+
+  <label for='last_name'>Last Name</label>"
+  <input name='last_name' type='text' />"
+</form>
+
+  <button name="submit"
+          id="submit"
+          onclick="update_user_profile();">Save Changes</button>
+<hr>
+<address></address>
+<!-- hhmts start --> Last modified: Wed Mar  2 18:47:42 CST 2011 <!-- hhmts end -->
+</body>
+</html>
