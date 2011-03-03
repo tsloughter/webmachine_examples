@@ -24,6 +24,20 @@ function update_user_profile() {
       }
     });
 }
+
+$(document).ready(function() {
+  path = window.location.pathname.split("/");
+
+   if (path.length > 2 && path[2] != "") {
+     var user_id = path[2];
+     $.getJSON('/user/'+user_id,
+                function(data) {
+                  $("#username").val(data['username']);
+                  $("#first_name").val(data['first_name']);
+                  $("#last_name").val(data['last_name']);
+                });
+  }
+});
 </script>
 </head>
 
@@ -34,13 +48,13 @@ function update_user_profile() {
 
 <form id="profile_form" name="profile_form" action="#">
   <label for='username'>User Name : </label>
-  <input name='username' type='text' />
+  <input id='username' name='username' type='text' />
   <br>
   <label for='first_name'>First Name : </label>
-  <input name='first_name' type='text' />
+  <input id='first_name' name='first_name' type='text' />
   <br>
   <label for='last_name'>Last Name : </label>
-  <input name='last_name' type='text' />
+  <input id='last_name' name='last_name' type='text' />
 </form>
 
   <button name="submit"
@@ -48,6 +62,6 @@ function update_user_profile() {
           onclick="update_user_profile();">Save Changes</button>
 <hr>
 <address></address>
-<!-- hhmts start --> Last modified: Wed Mar  2 19:33:35 CST 2011 <!-- hhmts end -->
+<!-- hhmts start --> Last modified: Wed Mar  2 20:23:17 CST 2011 <!-- hhmts end -->
 </body>
 </html>

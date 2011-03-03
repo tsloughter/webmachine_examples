@@ -42,8 +42,8 @@ process_post(ReqData, Ctx) ->
     {true, ReqData2, Ctx}.
 
 to_json(ReqData, Ctx) ->
-
-    {[], ReqData, Ctx}.
+    User = we_user:get(Ctx#context.db, <<"">>),
+    {?record_to_json(user, User), ReqData, Ctx}.
 
 to_html(ReqData, Ctx) ->
     case we_utils:maybe_fetch_object(Ctx, "user.html") of
